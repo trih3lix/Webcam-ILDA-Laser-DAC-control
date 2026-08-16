@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.venv/
+venv/
+
+# Runtime artefacts
+webcam_ilda.yaml
+recordings/
+*.ild
+!tests/data/*.ILD

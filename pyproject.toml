@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "webcam-ilda-laser"
+version = "0.1.0"
+description = "Draw what a camera sees on an ILDA laser projector, via a Helios laser DAC."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.23",
+    "opencv-python>=4.8",
+    "PyYAML>=6,<7",
+]
+
+[project.optional-dependencies]
+# Pure-Python USB backend. Only needed on platforms where the vendored Helios
+# SDK DLL cannot be used (Linux/macOS), and it additionally needs a libusb-1.0
+# runtime. On Windows the bundled DLL is the supported path -- no extra needed.
+usb = [
+    "pyusb>=1.2",
+]
+test = [
+    "pytest>=7",
+]
+
+[project.scripts]
+webcam-ilda = "webcam_ilda.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["webcam_ilda*"]
+
+[tool.setuptools.package-data]
+webcam_ilda = ["vendor/*.dll", "vendor/README.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
